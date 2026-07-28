@@ -1,0 +1,62 @@
+# Rotated so consecutive runs don't produce visibly repetitive content
+# (platforms treat mass-produced duplicative content as a monetization risk).
+themes:
+  - id: aita
+    label: "Am I the Asshole"
+    prompt: >
+      Write an original, first-person "Am I the Asshole" style Reddit story.
+      A relatable everyday conflict (family, roommate, work, friend group),
+      told in a casual, slightly dramatic Reddit voice. End right before the
+      verdict to hook the listener. 130-180 words. No slurs, no real names,
+      no real people or brands, no explicit content.
+    search_keywords: ["city street night", "cozy apartment", "people talking", "rain window"]
+  - id: tifu
+    label: "Today I F***ed Up"
+    prompt: >
+      Write an original, first-person "Today I effed up" style Reddit story:
+      an embarrassing but harmless mistake that escalates comically. Casual
+      Reddit voice, self-deprecating humor. 130-180 words. No slurs, no real
+      names, no real people or brands, no explicit or dangerous content.
+    search_keywords: ["messy kitchen", "office chaos", "traffic city", "funny mishap"]
+  - id: confession
+    label: "Confession"
+    prompt: >
+      Write an original, first-person "confession" style Reddit story: a
+      minor secret or regret shared anonymously, reflective tone, no big
+      reveal of anything illegal or harmful. 130-180 words. No slurs, no real
+      names, no real people or brands.
+    search_keywords: ["night city lights", "quiet room", "walking alone", "sunset road"]
+  - id: relationship
+    label: "Relationship Advice"
+    prompt: >
+      Write an original, first-person "relationship advice" style Reddit
+      story: a small, relatable conflict with a partner or date, ending on
+      a question asking what the listener would do. 130-180 words. No
+      slurs, no real names, no real people or brands, keep it PG-13.
+    search_keywords: ["couple silhouette", "coffee shop", "city sunset", "phone texting"]
+  - id: horror
+    label: "Short Horror / Creepy"
+    prompt: >
+      Write an original, first-person short creepy/paranormal Reddit-style
+      story suitable for all audiences (unsettling, not gory or graphic).
+      Build tension toward an ambiguous ending. 130-180 words. No slurs, no
+      real names, no real people or brands.
+    search_keywords: ["dark forest fog", "empty hallway", "abandoned house", "night woods"]
+
+tts:
+  voice: "en-US-GuyNeural"
+  rate: "+0%"
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  font: "DejaVu Sans Bold"
+  font_size: 64
+  caption_words_per_group: 4
+
+youtube:
+  category_id: "24" # Entertainment
+  privacy_status: "public"
+  made_for_kids: false
+  hashtags: ["#Shorts", "#RedditStories", "#StoryTime"]
