@@ -64,6 +64,8 @@ def run(args: argparse.Namespace) -> str:
     narration = tts.generate_narration(
         story.text, cfg["tts"]["voice"], cfg["tts"]["rate"], narration_path
     )
+    if not narration.words or narration.duration_s <= 0:
+        sys.exit("TTS produced no word timings -- narration/captions would be broken. Aborting.")
     print(f"      Duration: {narration.duration_s:.1f}s")
 
     print("[3/5] Building captions...")

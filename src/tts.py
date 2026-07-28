@@ -27,7 +27,7 @@ class Narration:
 
 
 async def _synthesize(text: str, voice: str, rate: str, audio_path: str) -> list[WordTiming]:
-    communicate = edge_tts.Communicate(text, voice=voice, rate=rate)
+    communicate = edge_tts.Communicate(text, voice=voice, rate=rate, boundary="WordBoundary")
     words: list[WordTiming] = []
     with open(audio_path, "wb") as audio_file:
         async for chunk in communicate.stream():
