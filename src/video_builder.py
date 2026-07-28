@@ -31,7 +31,7 @@ def _escape_filter_path(path: str) -> str:
 
 
 def build_short(
-    background_path: str,
+    background_paths: list[str],
     narration_path: str,
     ass_path: str,
     out_path: str,
@@ -40,26 +40,37 @@ def build_short(
     height: int = 1920,
     fps: int = 30,
 ) -> str:
+    """Cuts between each clip in `background_paths` (equal-length segments
+    covering `duration_s` total) instead of looping a single clip, then
+    burns in captions and muxes the narration audio over the result.
+    """
+    n = len(background_paths)
+    segment_length = duration_s / n
     ass_escaped = _escape_filter_path(ass_path)
-    filter_complex = (
-        f"[0:v]scale={width}:{height}:force_original_aspect_ratio=increase,"
-        f"crop={width}:{height},setsar=1,fps={fps},ass='{ass_escaped}'[v]"
-    )
-    cmd = [
-        "ffmpeg",
-        "-y",
-        "-stream_loop",
-        "-1",
-        "-i",
-        background_path,
-        "-i",
-        narration_path,
+
+    filter_parts = [
+        f"[{i}:v]scale={width}:{height}:force_original_aspect_ratio=increase,"
+        f"crop={width}:{height},setsar=1,fps={fps},trim=duration={segment_length:.3f},"
+        f"setpts=PTS-STARTPTS[seg{i}]"
+        for i in range(n)
+    ]
+    concat_inputs = "".join(f"[seg{i}]" for i in range(n))
+    filter_parts.append(f"{concat_inputs}concat=n={n}:v=1:a=0[bg]")
+    filter_parts.append(f"[bg]ass='{ass_escaped}'[v]")
+    filter_complex = ";".join(filter_parts)
+
+    cmd = ["ffmpeg", "-y"]
+    for path in background_paths:
+        cmd += ["-stream_loop", "-1", "-i", path]
+    cmd += ["-i", narration_path]
+
+    cmd += [
         "-filter_complex",
         filter_complex,
         "-map",
         "[v]",
         "-map",
-        "1:a",
+        f"{n}:a",
         "-t",
         f"{duration_s:.2f}",
         "-c:v",

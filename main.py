@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import random
 import shutil
@@ -84,14 +85,15 @@ def run(args: argparse.Namespace) -> str:
     pexels_key = os.environ.get("PEXELS_API_KEY")
     if not pexels_key:
         sys.exit("PEXELS_API_KEY is not set (see .env.example).")
-    background_path = os.path.join(work_dir, "background.mp4")
-    footage.fetch_background_clip(
-        pexels_key, story.search_keywords, background_path, narration.duration_s, rng=rng
+    num_clips = max(1, math.ceil(narration.duration_s / cfg["video"]["clip_segment_s"]))
+    background_paths = footage.fetch_background_clips(
+        pexels_key, story.search_keywords, work_dir, count=num_clips, rng=rng
     )
+    print(f"      Using {len(background_paths)} background clip(s)")
 
     final_path = os.path.join(ROOT, "output", f"{run_id}_{story.theme_id}.mp4")
     video_builder.build_short(
-        background_path,
+        background_paths,
         narration_path,
         ass_path,
         final_path,

@@ -51,6 +51,7 @@ video:
   width: 1080
   height: 1920
   fps: 30
+  clip_segment_s: 6 # cut to a new background clip roughly every N seconds
   font: "DejaVu Sans Bold"
   font_size: 64
   caption_words_per_group: 4
