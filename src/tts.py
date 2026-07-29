@@ -7,6 +7,7 @@ accurate than a separate speech-to-text pass.
 from __future__ import annotations
 
 import asyncio
+import re
 from dataclasses import dataclass
 
 import edge_tts
@@ -26,6 +27,17 @@ class Narration:
     duration_s: float
 
 
+def _normalize_for_tts(text: str) -> str:
+    """Rewrites word-joining punctuation edge-tts's tokenizer would split on
+    its own (em/en dashes glued to words with no surrounding space, e.g.
+    "years—but") into a plain comma+space, so the whitespace-token count
+    used for punctuation reattachment below stays aligned with the number
+    of WordBoundary events edge-tts actually emits.
+    """
+    text = re.sub(r"\s*[—–]\s*", ", ", text)  # em dash, en dash
+    return re.sub(r"\s+", " ", text).strip()
+
+
 async def _synthesize(text: str, voice: str, rate: str, audio_path: str) -> list[WordTiming]:
     communicate = edge_tts.Communicate(text, voice=voice, rate=rate, boundary="WordBoundary")
     words: list[WordTiming] = []
@@ -41,6 +53,7 @@ async def _synthesize(text: str, voice: str, rate: str, audio_path: str) -> list
 
 
 def generate_narration(text: str, voice: str, rate: str, audio_path: str) -> Narration:
+    text = _normalize_for_tts(text)
     words = asyncio.run(_synthesize(text, voice, rate, audio_path))
 
     # edge-tts's WordBoundary events strip punctuation from `text` (it's the
@@ -51,6 +64,11 @@ def generate_narration(text: str, voice: str, rate: str, audio_path: str) -> Nar
     if len(tokens) == len(words):
         for word, token in zip(words, tokens):
             word.text = token
+    else:
+        print(
+            f"      WARNING: word count mismatch (text={len(tokens)}, "
+            f"tts={len(words)}) -- captions will be missing punctuation this run"
+        )
 
     duration = words[-1].end_s if words else 0.0
     return Narration(audio_path=audio_path, words=words, duration_s=duration)
