@@ -42,5 +42,15 @@ async def _synthesize(text: str, voice: str, rate: str, audio_path: str) -> list
 
 def generate_narration(text: str, voice: str, rate: str, audio_path: str) -> Narration:
     words = asyncio.run(_synthesize(text, voice, rate, audio_path))
+
+    # edge-tts's WordBoundary events strip punctuation from `text` (it's the
+    # bare spoken word) -- recover periods/question marks etc. for captions
+    # by re-attaching the original whitespace-split tokens, which still
+    # carry punctuation, matched up in the same order.
+    tokens = text.split()
+    if len(tokens) == len(words):
+        for word, token in zip(words, tokens):
+            word.text = token
+
     duration = words[-1].end_s if words else 0.0
     return Narration(audio_path=audio_path, words=words, duration_s=duration)
