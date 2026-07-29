@@ -111,6 +111,6 @@ video:
 
 youtube:
   category_id: "24" # Entertainment
-  privacy_status: "public"
+  privacy_status: "unlisted"
   made_for_kids: false
   hashtags: ["#Shorts", "#RedditStories", "#StoryTime"]
