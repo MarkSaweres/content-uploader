@@ -34,7 +34,12 @@ def _normalize_for_tts(text: str) -> str:
     used for punctuation reattachment below stays aligned with the number
     of WordBoundary events edge-tts actually emits.
     """
-    text = re.sub(r"\s*[—–]\s*", ", ", text)  # em dash, en dash
+    text = re.sub(r"\s*[—–]\s*", ", ", text)  # em dash, en dash (glued or spaced)
+    # A plain hyphen used as a spaced aside ("mad - furious - so I left") is a
+    # separate stand-alone token that gets no WordBoundary event of its own,
+    # unlike a real compound word ("self-proclaimed", no surrounding spaces),
+    # which is left untouched.
+    text = re.sub(r"(?<=\S)\s+-\s+(?=\S)", ", ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
