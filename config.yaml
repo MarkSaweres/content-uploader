@@ -15,6 +15,17 @@ themes:
       130-180 words. No slurs, no real names, no real people or brands, no
       explicit content.
     search_keywords: ["city street night", "cozy apartment", "people talking", "rain window"]
+    settings:
+      - "splitting an inheritance with siblings"
+      - "a family Thanksgiving dinner"
+      - "a shared Airbnb with old friends"
+      - "a coworker's retirement party"
+      - "a child's birthday party at a rented venue"
+      - "a roommate's lease renewal"
+      - "a friend's bachelorette trip"
+      - "a family group chat blowing up"
+      - "co-parenting a shared pet after a breakup"
+      - "a carpool arrangement with a neighbor"
   - id: pettyrevenge
     label: "Petty Revenge"
     prompt: >
@@ -28,6 +39,17 @@ themes:
       130-180 words. No slurs, no real names, no real people or brands, no
       violence, no illegal acts.
     search_keywords: ["neighborhood street", "office desk", "apartment hallway", "parking lot"]
+    settings:
+      - "a noisy upstairs neighbor"
+      - "a landlord withholding a deposit"
+      - "a coworker stealing lunches from the break room"
+      - "an HOA president obsessed with lawn rules"
+      - "a rideshare driver scam"
+      - "an ex who won't return borrowed belongings"
+      - "a gym buddy who never spots or shows up"
+      - "a petty office parking spot dispute"
+      - "a sibling who always 'forgets' their wallet"
+      - "a subletter who trashed the apartment"
   - id: maliciouscompliance
     label: "Malicious Compliance"
     prompt: >
@@ -40,6 +62,17 @@ themes:
       what they'd have done differently. 130-180 words. No slurs, no real
       names, no real people or brands, no illegal acts.
     search_keywords: ["office building", "warehouse work", "suburban houses", "corporate hallway"]
+    settings:
+      - "a new office dress code memo"
+      - "an HOA lawn-maintenance rule"
+      - "a landlord's strict no-pets policy"
+      - "a corporate expense-reporting policy"
+      - "a rigid attendance policy at a warehouse job"
+      - "a strict customer return policy"
+      - "a school's overly literal uniform policy"
+      - "a gym's exact-attire enforcement"
+      - "a city noise-ordinance complaint"
+      - "an airline's carry-on size rule"
   - id: entitled
     label: "Entitled Person Gets Owned"
     prompt: >
@@ -53,6 +86,17 @@ themes:
       response was justified. 130-180 words. No slurs, no real names, no
       real people or brands, no violence.
     search_keywords: ["retail store", "restaurant interior", "checkout line", "parking lot argument"]
+    settings:
+      - "an airport gate during a flight delay"
+      - "a pediatrician's waiting room"
+      - "a gym locker room"
+      - "a public pool"
+      - "a daycare pickup line"
+      - "a DMV office"
+      - "a hotel front desk"
+      - "a movie theater"
+      - "a hardware store return counter"
+      - "a kids' birthday party at a trampoline park"
   - id: weddingdrama
     label: "Wedding / Family Drama"
     prompt: >
@@ -65,6 +109,17 @@ themes:
       No slurs, no real names, no real people or brands, no explicit
       content.
     search_keywords: ["wedding venue", "family dinner table", "elegant reception", "backyard party"]
+    settings:
+      - "a destination wedding cost dispute"
+      - "a seating chart fight"
+      - "an ex invited to the wedding"
+      - "a mother-in-law's dress code demand"
+      - "a sibling rivalry over being maid of honor"
+      - "a disputed wedding gift"
+      - "a bridesmaid dropping out last minute"
+      - "a father walking the bride who didn't raise her"
+      - "a wedding photographer disagreement"
+      - "a venue double-booking on the day of"
   - id: tifu
     label: "Today I F***ed Up"
     prompt: >
@@ -75,6 +130,17 @@ themes:
       the fallout. 130-180 words. No slurs, no real names, no real people or
       brands, no explicit or dangerous content.
     search_keywords: ["messy kitchen", "office chaos", "traffic city", "funny mishap"]
+    settings:
+      - "a big work presentation"
+      - "a first date"
+      - "a family road trip"
+      - "a job interview"
+      - "a group project deadline"
+      - "moving into a new apartment"
+      - "a DIY home repair gone wrong"
+      - "a formal dinner with in-laws"
+      - "a work Zoom call"
+      - "a flight or airport security line"
   - id: relationship
     label: "Relationship Betrayal"
     prompt: >
@@ -86,6 +152,17 @@ themes:
       130-180 words. No slurs, no real names, no real people or brands, keep
       it PG-13.
     search_keywords: ["couple silhouette", "coffee shop", "city sunset", "phone texting"]
+    settings:
+      - "a shared bank account discovery"
+      - "a partner's ex texting them late at night"
+      - "moving in together for the first time"
+      - "a partner's family holiday gathering"
+      - "a surprise pregnancy announcement"
+      - "a partner's secret spending habit"
+      - "finding out about a hidden social media account"
+      - "a partner's friend group excluding the narrator"
+      - "a disagreement over where to spend the holidays"
+      - "discovering an old unresolved relationship"
   - id: horror
     label: "Short Horror / Creepy"
     prompt: >
@@ -95,6 +172,17 @@ themes:
       ending. 130-180 words. No slurs, no real names, no real people or
       brands.
     search_keywords: ["dark forest fog", "empty hallway", "abandoned house", "night woods"]
+    settings:
+      - "an overnight solo babysitting job"
+      - "a solo camping trip"
+      - "a late shift alone in an office building"
+      - "a new apartment with strange neighbors"
+      - "a road trip breakdown at night"
+      - "a family cabin visit"
+      - "a graveyard shift at a parking garage"
+      - "an old house inherited from a relative"
+      - "a hiking trail that doesn't match the map"
+      - "a night security job at an empty building"
 
 tts:
   voice: "en-US-GuyNeural"

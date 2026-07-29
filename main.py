@@ -48,12 +48,13 @@ def run(args: argparse.Namespace) -> str:
 
     theme = next((t for t in cfg["themes"] if t["id"] == args.theme), None) if args.theme else None
     theme = theme or story_generator.pick_theme(cfg["themes"], rng)
-    print(f"[1/5] Theme: {theme['label']}")
+    setting = story_generator.pick_setting(theme, rng)
+    print(f"[1/5] Theme: {theme['label']}" + (f" -- Setting: {setting}" if setting else ""))
 
     groq_key = os.environ.get("GROQ_API_KEY")
     if not groq_key:
         sys.exit("GROQ_API_KEY is not set (see .env.example).")
-    story = story_generator.generate_story(groq_key, theme)
+    story = story_generator.generate_story(groq_key, theme, setting)
     print(f"      Story ({len(story.text.split())} words): {story.text[:80]}...")
 
     run_id = time.strftime("%Y%m%d-%H%M%S")

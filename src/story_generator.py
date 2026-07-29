@@ -26,8 +26,13 @@ SYSTEM_PROMPT = (
     "Never reuse or paraphrase a real Reddit post — invent everything. "
     "Never target real people, real brands, or protected groups, and no "
     "slurs, hate speech, or graphic violence/sexual content — the goal is "
-    "dramatic and polarizing, not hateful or explicit. Output ONLY the "
-    "story body: no title, no subreddit tag, no markdown, no quotation "
+    "dramatic and polarizing, not hateful or explicit. Each prompt gives you "
+    "a specific setting/premise to build the story around — use exactly "
+    "that setting. Do not default to a coffee shop, cafe, or barista "
+    "scenario unless the given setting explicitly is one; overused generic "
+    "settings are the biggest complaint about AI-generated story channels, "
+    "so lean into the specific setting you're given instead. Output ONLY "
+    "the story body: no title, no subreddit tag, no markdown, no quotation "
     "marks around the whole thing, no meta commentary."
 )
 
@@ -45,7 +50,16 @@ def pick_theme(themes: list[dict], rng: random.Random | None = None) -> dict:
     return rng.choice(themes)
 
 
-def generate_story(api_key: str, theme: dict, timeout: int = 30) -> Story:
+def pick_setting(theme: dict, rng: random.Random | None = None) -> str:
+    rng = rng or random
+    settings = theme.get("settings") or []
+    return rng.choice(settings) if settings else ""
+
+
+def generate_story(api_key: str, theme: dict, setting: str, timeout: int = 30) -> Story:
+    user_content = theme["prompt"]
+    if setting:
+        user_content = f"Setting for this story: {setting}.\n\n{user_content}"
     resp = requests.post(
         GROQ_URL,
         headers={"Authorization": f"Bearer {api_key}"},
@@ -53,7 +67,7 @@ def generate_story(api_key: str, theme: dict, timeout: int = 30) -> Story:
             "model": GROQ_MODEL,
             "messages": [
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": theme["prompt"]},
+                {"role": "user", "content": user_content},
             ],
             "temperature": 1.0,
             "max_tokens": 400,
