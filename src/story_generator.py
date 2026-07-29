@@ -15,11 +15,20 @@ GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 GROQ_MODEL = "llama-3.3-70b-versatile"
 
 SYSTEM_PROMPT = (
-    "You write short, original, PG-13 fictional stories in the style of "
-    "viral Reddit posts, meant to be narrated aloud in under 45 seconds. "
+    "You write short, original, PG-13 fictional stories in the style of the "
+    "most viral posts on Reddit's storytelling subreddits, meant to be "
+    "narrated aloud in under 45 seconds. Every story must: open with a "
+    "punchy one-sentence hook that states the conflict immediately (no "
+    "throat-clearing or scene-setting first); center on a genuinely "
+    "divisive, morally gray situation with real stakes, not a mundane or "
+    "obviously-one-sided scenario; and end on a cliffhanger or a direct "
+    "question to the listener so people argue about it in the comments. "
     "Never reuse or paraphrase a real Reddit post — invent everything. "
-    "Output ONLY the story body: no title, no subreddit tag, no markdown, "
-    "no quotation marks around the whole thing, no meta commentary."
+    "Never target real people, real brands, or protected groups, and no "
+    "slurs, hate speech, or graphic violence/sexual content — the goal is "
+    "dramatic and polarizing, not hateful or explicit. Output ONLY the "
+    "story body: no title, no subreddit tag, no markdown, no quotation "
+    "marks around the whole thing, no meta commentary."
 )
 
 

@@ -5,42 +5,95 @@ themes:
     label: "Am I the Asshole"
     prompt: >
       Write an original, first-person "Am I the Asshole" style Reddit story.
-      A relatable everyday conflict (family, roommate, work, friend group),
-      told in a casual, slightly dramatic Reddit voice. End right before the
-      verdict to hook the listener. 130-180 words. No slurs, no real names,
-      no real people or brands, no explicit content.
+      Open with a one-sentence hook that states the shocking premise
+      immediately. The conflict must be genuinely morally gray -- a situation
+      where reasonable people would take different sides, not an obvious
+      call. Raise the stakes (money, a wedding, a betrayal, an inheritance,
+      a broken promise) rather than a trivial disagreement. Casual, dramatic
+      Reddit voice. End right before the verdict, or on a direct question to
+      the listener ("Was I wrong?"), so people argue in the comments.
+      130-180 words. No slurs, no real names, no real people or brands, no
+      explicit content.
     search_keywords: ["city street night", "cozy apartment", "people talking", "rain window"]
+  - id: pettyrevenge
+    label: "Petty Revenge"
+    prompt: >
+      Write an original, first-person "petty revenge" style Reddit story.
+      Open with a one-sentence hook naming who wronged the narrator and how.
+      Someone (a neighbor, coworker, landlord, in-law, entitled stranger)
+      wrongs the narrator or someone sympathetic, then the narrator
+      engineers a clever, satisfying, non-violent comeuppance. Make the
+      antagonist infuriating enough that the payback feels earned. End on
+      the moment the revenge lands, or ask the listener if it went too far.
+      130-180 words. No slurs, no real names, no real people or brands, no
+      violence, no illegal acts.
+    search_keywords: ["neighborhood street", "office desk", "apartment hallway", "parking lot"]
+  - id: maliciouscompliance
+    label: "Malicious Compliance"
+    prompt: >
+      Write an original, first-person "malicious compliance" style Reddit
+      story. Open with a one-sentence hook. A boss, HOA, landlord, or
+      petty authority figure enforces an unreasonable, overly literal rule
+      on the narrator -- so the narrator follows it exactly, to the letter,
+      and it backfires spectacularly on the person who made the rule. Sharp,
+      escalating, and satisfying. End on the fallout, or ask the listener
+      what they'd have done differently. 130-180 words. No slurs, no real
+      names, no real people or brands, no illegal acts.
+    search_keywords: ["office building", "warehouse work", "suburban houses", "corporate hallway"]
+  - id: entitled
+    label: "Entitled Person Gets Owned"
+    prompt: >
+      Write an original, first-person Reddit story in the style of
+      r/EntitledParents / r/EntitledPeople. Open with a one-sentence hook
+      describing the outrageous demand. An entitled customer, parent, or
+      stranger demands something absurd and escalates when refused, until
+      someone (the narrator, a manager, security) shuts it down. Make the
+      entitled person's dialogue and behavior larger-than-life. End on the
+      moment they get told off or embarrassed, or ask the listener if the
+      response was justified. 130-180 words. No slurs, no real names, no
+      real people or brands, no violence.
+    search_keywords: ["retail store", "restaurant interior", "checkout line", "parking lot argument"]
+  - id: weddingdrama
+    label: "Wedding / Family Drama"
+    prompt: >
+      Write an original, first-person Reddit story about wedding or family
+      drama (in-laws, siblings, a bridezilla, a family secret revealed at
+      the worst moment). Open with a one-sentence hook stating what went
+      wrong and who caused it. Build real tension between family loyalty and
+      what's fair to the narrator. End right before the confrontation
+      resolves, or ask the listener whose side they're on. 130-180 words.
+      No slurs, no real names, no real people or brands, no explicit
+      content.
+    search_keywords: ["wedding venue", "family dinner table", "elegant reception", "backyard party"]
   - id: tifu
     label: "Today I F***ed Up"
     prompt: >
-      Write an original, first-person "Today I effed up" style Reddit story:
-      an embarrassing but harmless mistake that escalates comically. Casual
-      Reddit voice, self-deprecating humor. 130-180 words. No slurs, no real
-      names, no real people or brands, no explicit or dangerous content.
+      Write an original, first-person "Today I effed up" style Reddit story.
+      Open with a one-sentence hook. An embarrassing mistake escalates fast
+      and keeps getting worse in an unexpected direction, self-deprecating
+      and a little cringe. Casual Reddit voice. End on the worst moment of
+      the fallout. 130-180 words. No slurs, no real names, no real people or
+      brands, no explicit or dangerous content.
     search_keywords: ["messy kitchen", "office chaos", "traffic city", "funny mishap"]
-  - id: confession
-    label: "Confession"
-    prompt: >
-      Write an original, first-person "confession" style Reddit story: a
-      minor secret or regret shared anonymously, reflective tone, no big
-      reveal of anything illegal or harmful. 130-180 words. No slurs, no real
-      names, no real people or brands.
-    search_keywords: ["night city lights", "quiet room", "walking alone", "sunset road"]
   - id: relationship
-    label: "Relationship Advice"
+    label: "Relationship Betrayal"
     prompt: >
       Write an original, first-person "relationship advice" style Reddit
-      story: a small, relatable conflict with a partner or date, ending on
-      a question asking what the listener would do. 130-180 words. No
-      slurs, no real names, no real people or brands, keep it PG-13.
+      story centered on a boundary getting crossed or a small betrayal of
+      trust (a lie, a secret, broken promise, overstepping in-law/friend) --
+      not a trivial spat. Open with a one-sentence hook. End on a direct
+      question asking the listener what they would do, so it invites debate.
+      130-180 words. No slurs, no real names, no real people or brands, keep
+      it PG-13.
     search_keywords: ["couple silhouette", "coffee shop", "city sunset", "phone texting"]
   - id: horror
     label: "Short Horror / Creepy"
     prompt: >
       Write an original, first-person short creepy/paranormal Reddit-style
       story suitable for all audiences (unsettling, not gory or graphic).
-      Build tension toward an ambiguous ending. 130-180 words. No slurs, no
-      real names, no real people or brands.
+      Open with a one-sentence hook. Build tension toward an ambiguous
+      ending. 130-180 words. No slurs, no real names, no real people or
+      brands.
     search_keywords: ["dark forest fog", "empty hallway", "abandoned house", "night woods"]
 
 tts:
