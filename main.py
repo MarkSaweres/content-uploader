@@ -14,6 +14,7 @@ import argparse
 import math
 import os
 import random
+import re
 import shutil
 import sys
 import time
@@ -31,12 +32,23 @@ def load_config() -> dict:
         return yaml.safe_load(f)
 
 
-def build_youtube_metadata(cfg: dict, story) -> dict:
+def extract_hook(text: str, max_chars: int = 80) -> str:
+    """First full sentence of the story, used as both the on-screen title
+    card and the YouTube title/description -- truncated on a word boundary
+    (never mid-word) only if that sentence itself is too long.
+    """
+    text = text.strip()
+    sentences = re.split(r"(?<=[.!?])\s+", text, maxsplit=1)
+    hook = sentences[0].strip() if sentences else text
+    if len(hook) > max_chars:
+        hook = hook[:max_chars].rsplit(" ", 1)[0] + "..."
+    return hook
+
+
+def build_youtube_metadata(cfg: dict, story, hook: str) -> dict:
     hashtags = " ".join(cfg["youtube"]["hashtags"])
-    first_line = story.text.strip().splitlines()[0]
-    hook = (first_line[:70] + "...") if len(first_line) > 70 else first_line
     title = f"{hook} {hashtags}".strip()
-    description = f"{story.text}\n\n{hashtags}"
+    description = f"{hook}\n\n{hashtags}"
     tags = [story.theme_id, "reddit", "storytime", "shorts"]
     return {"title": title, "description": description, "tags": tags}
 
@@ -54,7 +66,9 @@ def run(args: argparse.Namespace) -> str:
     if not groq_key:
         sys.exit("GROQ_API_KEY is not set (see .env.example).")
     story = story_generator.generate_story(groq_key, theme)
+    hook = extract_hook(story.text)
     print(f"      Story ({len(story.text.split())} words): {story.text[:80]}...")
+    print(f"      Hook: {hook}")
 
     run_id = time.strftime("%Y%m%d-%H%M%S")
     work_dir = os.path.join(ROOT, "output", run_id)
@@ -79,6 +93,10 @@ def run(args: argparse.Namespace) -> str:
         font=cfg["video"]["font"],
         font_size=cfg["video"]["font_size"],
         words_per_group=cfg["video"]["caption_words_per_group"],
+        title=hook,
+        title_font_size=cfg["video"]["title_font_size"],
+        title_margin_v=cfg["video"]["title_margin_v"],
+        total_duration_s=narration.duration_s,
     )
 
     print("[4/5] Fetching background footage + assembling video...")
@@ -112,7 +130,7 @@ def run(args: argparse.Namespace) -> str:
         return final_path
 
     print("[5/5] Uploading to YouTube Shorts...")
-    meta = build_youtube_metadata(cfg, story)
+    meta = build_youtube_metadata(cfg, story, hook)
     youtube = youtube_uploader.authenticate(
         os.environ["YOUTUBE_CLIENT_SECRET_FILE"], os.environ["YOUTUBE_TOKEN_FILE"]
     )

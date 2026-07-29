@@ -108,6 +108,8 @@ video:
   font: "DejaVu Sans Bold"
   font_size: 64
   caption_words_per_group: 4
+  title_font_size: 46 # persistent hook/title card pinned to the bottom of screen
+  title_margin_v: 110 # distance from the bottom edge, in pixels
 
 youtube:
   category_id: "24" # Entertainment
