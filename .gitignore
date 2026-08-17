@@ -5,3 +5,12 @@ __pycache__/
 youtube_client_secret.json
 youtube_token.json
 output/
+
+# Intune packaging: installers, downloaded tool, and build output are never committed.
+# Ignore the contents rather than the directories, so the placeholder READMEs
+# survive - git cannot re-include a file inside an excluded directory.
+intune/installers/*
+!intune/installers/README.txt
+intune/tools/*
+!intune/tools/README.txt
+intune/output/

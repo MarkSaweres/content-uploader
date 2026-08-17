@@ -1,0 +1,76 @@
+{
+  "_comment": [
+    "One entry per Intune Win32 app. Only 'name' and 'setupFile' are required.",
+    "Leave installCommand / uninstallCommand / detection as null to have them",
+    "derived from the installer itself. Set 'skip': true to exclude an app",
+    "from a build without deleting its entry.",
+    "",
+    "sourceFolder is relative to -InstallerRoot (see README). Everything in",
+    "that folder is packaged into the .intunewin, so keep one folder per app."
+  ],
+
+  "defaults": {
+    "installContext": "system",
+    "restartBehavior": "suppress"
+  },
+
+  "apps": [
+    {
+      "name": "7-Zip",
+      "publisher": "Igor Pavlov",
+      "version": "24.09",
+      "sourceFolder": "7zip",
+      "setupFile": "7z2409-x64.msi",
+      "installCommand": null,
+      "uninstallCommand": null,
+      "extraArguments": null,
+      "installContext": "system",
+      "restartBehavior": "suppress",
+      "detection": null,
+      "notes": "Plain MSI - everything auto-derives, including the product code.",
+      "skip": false
+    },
+    {
+      "name": "Notepad++",
+      "publisher": "Notepad++ Team",
+      "version": "8.7.1",
+      "sourceFolder": "notepadplusplus",
+      "setupFile": "npp.8.7.1.Installer.x64.exe",
+      "installCommand": null,
+      "uninstallCommand": null,
+      "extraArguments": null,
+      "installContext": "system",
+      "restartBehavior": "suppress",
+      "detection": null,
+      "notes": "NSIS. Uninstall string is <installdir>\\uninstall.exe /S - confirm on a test VM.",
+      "skip": false
+    },
+    {
+      "name": "Example - fully overridden",
+      "publisher": "Contoso",
+      "version": "1.2.3",
+      "sourceFolder": "contoso-app",
+      "setupFile": "ContosoSetup.exe",
+      "installCommand": "\"ContosoSetup.exe\" /quiet /norestart LICENSEKEY=ABC123",
+      "uninstallCommand": "msiexec /x \"{11111111-2222-3333-4444-555555555555}\" /qn /norestart",
+      "extraArguments": null,
+      "installContext": "system",
+      "restartBehavior": "suppress",
+      "detection": {
+        "type": "Registry",
+        "summary": "Registry DisplayVersion >= 1.2.3",
+        "detail": {
+          "Rule type": "Registry",
+          "Key path": "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{11111111-2222-3333-4444-555555555555}",
+          "Value name": "DisplayVersion",
+          "Detection method": "String comparison",
+          "Operator": "Greater than or equal to",
+          "Value": "1.2.3",
+          "Associated 32-bit": "No"
+        }
+      },
+      "notes": "Shows how to pin every field by hand when auto-derivation is not enough.",
+      "skip": true
+    }
+  ]
+}
