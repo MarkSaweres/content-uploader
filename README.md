@@ -1,8 +1,15 @@
 # Content Uploader
 
-Generates an original short "Reddit story" style video (AI voiceover +
-stock background footage + burned-in captions) and uploads it to YouTube
-Shorts, on a schedule, using only free-tier services.
+An automated AI Shorts pipeline. Every day it writes an original short story, narrates it, edits it into a captioned vertical video, and uploads it to YouTube Shorts with no manual steps.
+
+## Highlights
+
+- **Chains several APIs in one Python pipeline.** The Groq LLM API (Llama 3.3 70B through an OpenAI-compatible chat completions endpoint) writes the story, edge-tts narrates it with word-level timings, the Pexels API supplies vertical stock footage, and ffmpeg builds the final video with burned-in captions.
+- **Uploads through the YouTube Data API v3 with OAuth 2.0.** A cached refresh token lets it upload without a browser after the first sign-in. The Google OAuth consent screen is published to production.
+- **Runs unattended on GitHub Actions.** A daily cron workflow runs the whole pipeline, with API keys and OAuth credentials stored as encrypted repository secrets. It can also be triggered by hand.
+- **Safe to test.** `--dry-run` builds the video locally and skips the upload, so output can be reviewed first.
+
+**Tech stack:** Python, Groq API, edge-tts, Pexels API, ffmpeg, YouTube Data API v3, OAuth 2.0, GitHub Actions
 
 ## Pipeline
 
@@ -86,7 +93,7 @@ an upload costs ~1,600 units, so you can upload roughly **6 videos/day**
 before hitting the cap (request a quota increase from Google if you need
 more — it's free but requires an audit form).
 
-## 3. Before you turn this fully loose, read this
+## 3. Notes on content policy
 
 - **Monetization policy risk**: YouTube's Partner Program, TikTok's Creator
   Rewards Program, and Facebook's monetization terms all explicitly exclude
