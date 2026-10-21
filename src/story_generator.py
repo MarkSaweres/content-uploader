@@ -19,23 +19,28 @@ GROQ_MODEL = "openai/gpt-oss-120b"
 SYSTEM_PROMPT = (
     "You write short, original, PG-13 fictional stories in the style of the "
     "most viral posts on Reddit's storytelling subreddits, meant to be "
-    "narrated aloud in under 45 seconds. Every story must: open with a "
-    "punchy one-sentence hook that states the conflict immediately (no "
-    "throat-clearing or scene-setting first); center on a genuinely "
-    "divisive, morally gray situation with real stakes, not a mundane or "
-    "obviously-one-sided scenario; and end on a cliffhanger or a direct "
+    "narrated aloud in under 45 seconds to someone with zero context. Every "
+    "story must: open with a punchy one-sentence hook that states the "
+    "conflict in plain, immediately understandable terms (no throat-"
+    "clearing or scene-setting first); center on ONE clear, genuinely "
+    "divisive, morally gray conflict with real stakes -- not mundane, but "
+    "also not cluttered with sub-plots or odd specific details that take "
+    "effort to parse; be told in plain chronological order a stranger can "
+    "follow on a single listen; and end on a cliffhanger or a direct "
     "question to the listener so people argue about it in the comments. "
-    "Never reuse or paraphrase a real Reddit post — invent everything. "
-    "Never target real people, real brands, or protected groups, and no "
-    "slurs, hate speech, or graphic violence/sexual content — the goal is "
-    "dramatic and polarizing, not hateful or explicit. Each prompt gives you "
-    "a specific setting/premise to build the story around — use exactly "
-    "that setting. Do not default to a coffee shop, cafe, or barista "
-    "scenario unless the given setting explicitly is one; overused generic "
-    "settings are the biggest complaint about AI-generated story channels, "
-    "so lean into the specific setting you're given instead. Output ONLY "
-    "the story body: no title, no subreddit tag, no markdown, no quotation "
-    "marks around the whole thing, no meta commentary."
+    "If a real post title is given as inspiration, use ONLY its general "
+    "scenario -- never copy its wording, and never reuse or paraphrase any "
+    "other real Reddit post from memory; invent every specific detail "
+    "yourself. Never target real people, real brands, or protected groups, "
+    "and no slurs, hate speech, or graphic violence/sexual content -- the "
+    "goal is dramatic, clear, and polarizing, not hateful, explicit, or "
+    "confusing. Each prompt gives you a specific setting/premise -- use "
+    "exactly that, and resist adding extra embellishments or twists beyond "
+    "what's needed to tell ONE clean conflict. Do not default to a coffee "
+    "shop, cafe, or barista scenario unless the given setting explicitly is "
+    "one. Output ONLY the story body: no title, no subreddit tag, no "
+    "markdown, no quotation marks around the whole thing, no meta "
+    "commentary."
 )
 
 
@@ -58,9 +63,17 @@ def pick_setting(theme: dict, rng: random.Random | None = None) -> str:
     return rng.choice(settings) if settings else ""
 
 
-def generate_story(api_key: str, theme: dict, setting: str, timeout: int = 30) -> Story:
+def generate_story(
+    api_key: str, theme: dict, setting: str = "", premise: str = "", timeout: int = 30
+) -> Story:
     user_content = theme["prompt"]
-    if setting:
+    if premise:
+        user_content = (
+            "Inspired by a real post title (use ONLY its general scenario -- "
+            "do not copy its wording or reuse it verbatim; invent your own "
+            f'original story around this premise): "{premise}"\n\n{user_content}'
+        )
+    elif setting:
         user_content = f"Setting for this story: {setting}.\n\n{user_content}"
     resp = requests.post(
         GROQ_URL,

@@ -15,6 +15,7 @@ themes:
       130-180 words. No slurs, no real names, no real people or brands, no
       explicit content.
     search_keywords: ["city street night", "cozy apartment", "people talking", "rain window"]
+    source_subreddit: "AmItheAsshole"
     settings:
       - "splitting an inheritance with siblings"
       - "a family Thanksgiving dinner"
@@ -39,6 +40,7 @@ themes:
       130-180 words. No slurs, no real names, no real people or brands, no
       violence, no illegal acts.
     search_keywords: ["neighborhood street", "office desk", "apartment hallway", "parking lot"]
+    source_subreddit: "pettyrevenge"
     settings:
       - "a noisy upstairs neighbor"
       - "a landlord withholding a deposit"
@@ -62,6 +64,7 @@ themes:
       what they'd have done differently. 130-180 words. No slurs, no real
       names, no real people or brands, no illegal acts.
     search_keywords: ["office building", "warehouse work", "suburban houses", "corporate hallway"]
+    source_subreddit: "MaliciousCompliance"
     settings:
       - "a new office dress code memo"
       - "an HOA lawn-maintenance rule"
@@ -86,6 +89,7 @@ themes:
       response was justified. 130-180 words. No slurs, no real names, no
       real people or brands, no violence.
     search_keywords: ["retail store", "restaurant interior", "checkout line", "parking lot argument"]
+    source_subreddit: "EntitledPeople"
     settings:
       - "an airport gate during a flight delay"
       - "a pediatrician's waiting room"
@@ -130,6 +134,7 @@ themes:
       the fallout. 130-180 words. No slurs, no real names, no real people or
       brands, no explicit or dangerous content.
     search_keywords: ["messy kitchen", "office chaos", "traffic city", "funny mishap"]
+    source_subreddit: "tifu"
     settings:
       - "a big work presentation"
       - "a first date"
