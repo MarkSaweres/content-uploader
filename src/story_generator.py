@@ -12,7 +12,9 @@ from dataclasses import dataclass
 import requests
 
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
-GROQ_MODEL = "llama-3.3-70b-versatile"
+# Groq deprecates/renames models fairly often -- if this starts 404ing again,
+# check https://console.groq.com/docs/models for the current production id.
+GROQ_MODEL = "openai/gpt-oss-120b"
 
 SYSTEM_PROMPT = (
     "You write short, original, PG-13 fictional stories in the style of the "
@@ -70,7 +72,8 @@ def generate_story(api_key: str, theme: dict, setting: str, timeout: int = 30) -
                 {"role": "user", "content": user_content},
             ],
             "temperature": 1.0,
-            "max_tokens": 400,
+            "max_completion_tokens": 400,
+            "reasoning_effort": "low",
         },
         timeout=timeout,
     )
